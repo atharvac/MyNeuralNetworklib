@@ -6,7 +6,8 @@ def sigmoid(x):
     return 1 / (1 + e**(-x))
 
 class NeuralNetwork:
-
+    """Number of input nodes, Number of hidden nodes, Number of output nodes.
+    guess method returns only output while taking input(python list)"""
     def __init__(self,numI,numH,numO):
         self.input_nodes = numI
         self.hidden_nodes = numH
@@ -21,7 +22,8 @@ class NeuralNetwork:
         #self.bias_o = 1
         self.bias_h = np.random.rand(self.hidden_nodes,1)
         self.bias_o = np.random.rand(self.output_nodes,1)
-
+    
+    #Input is python list
     def feedforward(self,input1):
         ############Generating hidden O/P##################
         input_mat = np.array(input1)
@@ -40,6 +42,7 @@ class NeuralNetwork:
         #return rr[0]
         return input_mat,hidden,output
 
+    #Inputs, answers is python list, LR (learning rate) is float
     def train(self,inputs,answers,LR):
         targets = np.array(answers)
         targets = np.reshape(targets,(len(answers),1))
@@ -66,6 +69,7 @@ class NeuralNetwork:
         weights_ih_delta = gradient_h.dot(input_T)
         self.weights_ih += weights_ih_delta
 
+    #inp is python list
     def guess(self,inp):
         i,h,o = self.feedforward(inp)
         o = np.reshape(o,(1,self.output_nodes))
