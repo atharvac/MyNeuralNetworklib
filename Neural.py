@@ -22,6 +22,7 @@ class NeuralNetwork:
         #self.bias_o = 1
         self.bias_h = np.random.rand(self.hidden_nodes,1)
         self.bias_o = np.random.rand(self.output_nodes,1)
+        self.hLayer = []
     
     #Input is python list
     def feedforward(self,input1):
@@ -32,6 +33,8 @@ class NeuralNetwork:
         hidden = hidden + self.bias_h
         ################Activation func####################
         hidden = sigmoid(hidden)
+        # Save hidden layer for Autoencoders
+        self.hLayer = hidden
         ###################################################
         output = self.weights_ho.dot(hidden)
         output = output + self.bias_o
